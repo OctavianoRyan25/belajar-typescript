@@ -7,10 +7,11 @@ export const successResponse = <T>(data: T, message = "Success"): ApiResponse<T>
     };
   };
   
-  export const errorResponse = <T>(error: string, message = "Error"): ApiResponse<T> => {
+  export const errorResponse = <T>(error: string, message = "Error", error_code: number): ApiResponse<T> => {
     return {
       success: false,
       message,
       error,
+      error_code,
     };
   };

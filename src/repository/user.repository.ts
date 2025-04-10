@@ -1,8 +1,9 @@
 // import { User } from "../model/user.model";
-import { PrismaClient, User } from '@prisma/client';
+import { PrismaClient, User, Prisma } from '@prisma/client';
+import { UserInterface } from "../interface/user.interface";
 const prisma = new PrismaClient();
 
-export class UserRepository {
+export class UserRepository implements UserInterface {
     findAll(): Promise<User[]> {
         return prisma.user.findMany();
     }
@@ -11,12 +12,12 @@ export class UserRepository {
             where: { id },
         });
     }
-    create(user: User): Promise<User> {
+    create(user: Prisma.UserCreateInput): Promise<User> {
         return prisma.user.create({
             data: user,
         });
     }
-    update(id: number, user: User): Promise<User> {
+    update(id: number, user: Prisma.UserUpdateInput): Promise<User> {
         return prisma.user.update({
             where: { id },
             data: user,

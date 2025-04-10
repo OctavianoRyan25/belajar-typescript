@@ -8,8 +8,8 @@ export class UserService{
         try {
             const users = await this.userUseCase.findAll();
             res.status(200).json(successResponse(users, 'Users fetched successfully'));
-        } catch (error) {
-            res.status(500).json(errorResponse('Failed to fetch users'));
+        } catch (error: any) {
+            res.status(500).json(errorResponse('Failed to fetch users', error.message, error.code));
         }
     }
 
@@ -17,8 +17,8 @@ export class UserService{
         try {
             const user = await this.userUseCase.create(req.body);
             res.status(201).json(successResponse(user, 'User created successfully'));
-        } catch (error) {
-            res.status(500).json(errorResponse('Failed to create user'));
+        } catch (error: any) {
+            res.status(500).json(errorResponse('Failed to create user', error.message, error.code));
         }
     }
 }
