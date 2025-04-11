@@ -1,4 +1,5 @@
 import {ApiResponse} from '../res/response';
+import slug from 'slugify';
 export const successResponse = <T>(data: T, message = "Success"): ApiResponse<T> => {
     return {
       success: true,
@@ -15,3 +16,10 @@ export const successResponse = <T>(data: T, message = "Success"): ApiResponse<T>
       error_code,
     };
   };
+
+  export const slugify = (text: string): string => {
+    return slug(text, {
+      lower: true,
+      strict: true,
+    });
+  }
