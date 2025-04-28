@@ -6,4 +6,6 @@ export interface UserInterface {
     create(user: Prisma.UserCreateInput): Promise<User>;
     update(id: number, user: Prisma.UserCreateInput): Promise<User>;
     delete(id: number): Promise<User>;
+
+    getByEmail(email: string): Promise<User | null>;
 }

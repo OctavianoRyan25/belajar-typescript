@@ -28,4 +28,10 @@ export class UserRepository implements UserInterface {
             where: { id },
         });
     }
+
+    getByEmail(email: string): Promise<User | null> {
+        return prisma.user.findUnique({
+            where: { email },
+        });
+    }
 }

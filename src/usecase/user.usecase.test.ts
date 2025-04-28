@@ -1,7 +1,6 @@
 import { CreateUserDto, parseUserDto } from '../dto/user.dto';
 import { User } from "@prisma/client";
 import { UserRepository } from '../repository/user.repository';
-import { hashPass } from '../helper/hash';
 export class UserUseCase{
     constructor(private userRepository: UserRepository) {}
 
@@ -28,12 +27,13 @@ export class UserUseCase{
         const parsedUser = parseUserDto(user);
 
         try {
-            parsedUser.password = await hashPass(user.password);
             return await this.userRepository.create(parsedUser);
         }
         catch (error: any) {
             throw new Error(`Error creating user: ${error.message}`);
         }
+
+        // return await this.userRepository.create(parsedUser);
     }
 
     async update(id: number, user: any):Promise<User> {
